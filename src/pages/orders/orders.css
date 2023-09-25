@@ -1,0 +1,75 @@
+.orders-section {
+  padding: 20px 50px 0 50px;
+}
+
+.orders-details-top-section {
+  box-shadow: 0 0 10px gray;
+  padding: 20px 50px 20px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.orders-details-section-top {
+  color: gray;
+}
+
+.orders-details-section-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-id-styling {
+  text-decoration-line: underline;
+  text-decoration-color: gray;
+}
+
+.orders-details-section-bottom-left {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.orders-details-section-bottom-right {
+  display: flex;
+  gap: 20px;
+}
+
+.orders-details-mid-section {
+  margin: 20px 50px 0 50px;
+  border-radius: 10px;
+  border: 1px solid rgb(192, 184, 184);
+  display: flex;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 20px 30px;
+}
+
+.order-small-section {
+  display: flex;
+  flex-direction: column;
+  padding-right: 10px;
+  gap: 10px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  border-right: 1px solid rgb(165, 161, 161);
+  width: 14%;
+  min-height: 80px;
+}
+
+.order-small-section:last-child {
+  border: none;
+}
+
+.order-small-section-title {
+  font-size: 13px;
+  color: rgb(159, 149, 149);
+  font-weight: 500;
+}
+
+.order-small-section-value {
+  font-size: 18px;
+  font-weight: 700;
+}
