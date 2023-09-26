@@ -3,8 +3,14 @@ import { data, productsData } from "../statisData/orders";
 const getProductsDetails = (orderProducts) => {
   const products = [];
   for (let i = 0; i < orderProducts.length; i++) {
-    const data = productsData.filter((prod) => prod.id === orderProducts[i].id);
-    products.push(...data);
+    const indx = productsData.findIndex(
+      (prod) => prod.id === orderProducts[i].id
+    );
+    const data = productsData[indx];
+    // data["qnty"] = orderProducts[i].qnty;
+    data.total = orderProducts[i].total;
+    data.status = orderProducts[i].status;
+    products.push({ ...data, qnty: orderProducts[i].qnty });
   }
   return products;
 };

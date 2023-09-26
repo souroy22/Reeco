@@ -1,12 +1,35 @@
 import React, { useEffect } from "react";
 import "./orders.css";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import LocalPrintshopOutlinedIcon from "@mui/icons-material/LocalPrintshopOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import { addOrderDetailsData } from "../../redux/reducers/orderReducer";
 import { fetchOrderDetails } from "../../utils/fetchOrderDetails";
 import CustomInput from "../../components/input/CustomInput";
+import TableComponent from "../../components/table/Table";
+import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+
+const columns = [
+  { name: "", align: "left", value: "image", isImage: true, width: "100px" },
+  { name: "Product Name", align: "left", value: "prodName" },
+  { name: "Brand", align: "left", value: "brand" },
+  { name: "Price", align: "left", value: "price" },
+  { name: "Quantity", align: "left", value: "qnty" },
+  { name: "total", align: "left", value: "total" },
+  { name: "Status", align: "left", value: "status", isButton: true },
+];
+
+const ProductStatusBtn = (status) => {
+  return (
+    <Box sx={{ display: "flex", gap: "20px" }}>
+      <DoneOutlinedIcon />
+      <CloseOutlinedIcon />
+      <Box>Edit</Box>
+    </Box>
+  );
+};
 
 const OrderDetails = () => {
   const { orderId } = useParams();
@@ -14,7 +37,46 @@ const OrderDetails = () => {
   const dispatch = useDispatch();
 
   const orderDetails = useSelector((state) => state.orders.orderDetails);
-  console.log("orderDetails", orderDetails);
+
+  const createOrderDetailsData = (
+    image,
+    prodName,
+    brand,
+    price,
+    qnty,
+    total,
+    status
+  ) => {
+    return {
+      image: { value: image },
+      prodName: { value: prodName },
+      brand: { value: brand },
+      price: { value: price },
+      qnty: { value: qnty },
+      total: { value: total },
+      status: { value: status, btnComponent: ProductStatusBtn },
+    };
+  };
+
+  const structureTableData = () => {
+    const data = [];
+    if (Object.keys(orderDetails).length) {
+      for (let i = 0; i < orderDetails.products.length; i++) {
+        data.push(
+          createOrderDetailsData(
+            orderDetails.products[i].image,
+            orderDetails.products[i].prodName,
+            orderDetails.products[i].brand,
+            orderDetails.products[i].price,
+            orderDetails.products[i].qnty,
+            orderDetails.products[i].total,
+            orderDetails.products[i].status
+          )
+        );
+      }
+    }
+    return data;
+  };
 
   useEffect(() => {
     const orderData = fetchOrderDetails(orderId);
@@ -109,7 +171,13 @@ const OrderDetails = () => {
               <LocalPrintshopOutlinedIcon color="success" />
             </div>
           </div>
-          <div></div>
+          <div>
+            <TableComponent
+              data={structureTableData()}
+              columns={columns}
+              // onClickOnRow={onClickOnRow}
+            />
+          </div>
         </div>
       </div>
     </div>

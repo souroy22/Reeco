@@ -21,6 +21,8 @@ const TableComponent = ({ columns, data, onClickOnRow }) => {
     },
   }));
 
+  console.log("Data", data);
+
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
     "&:nth-of-type(odd)": {
       backgroundColor: theme.palette.action.hover,
@@ -40,6 +42,7 @@ const TableComponent = ({ columns, data, onClickOnRow }) => {
               <StyledTableCell
                 key={column.name}
                 align={column.align || "center"}
+                width={column.width}
               >
                 {column.name}
               </StyledTableCell>
@@ -58,15 +61,20 @@ const TableComponent = ({ columns, data, onClickOnRow }) => {
                   key={indx}
                   component="th"
                   scope="row"
-                  align={rows[column.value]?.align || "center"}
+                  align={rows[column.value]?.align || "left"}
+                  width={column.width}
                 >
                   {columns[indx]?.isButton ? (
-                    <Button
-                      variant="contained"
-                      color={statusBtnColor[rows[column.value]?.value]}
-                    >
-                      {rows[column.value]?.value}
-                    </Button>
+                    rows[column.value]?.btnComponent(rows[column.value]?.value)
+                  ) : columns[indx]?.isImage ? (
+                    <img
+                      src={rows[column.value]?.value}
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        borderRadius: "50%",
+                      }}
+                    />
                   ) : (
                     rows[column.value]?.value
                   )}

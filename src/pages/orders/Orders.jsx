@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from "react";
 import TableComponent from "../../components/table/Table";
-import { columns, data, productsData } from "../../statisData/orders";
+import { columns, data, statusBtnColor } from "../../statisData/orders";
 import { addOrders } from "../../redux/reducers/orderReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
+
+const CustomButton = (status) => {
+  console.log("Status", status);
+  return (
+    <Button variant="contained" color={statusBtnColor[status]}>
+      {status}
+    </Button>
+  );
+};
 
 const Orders = () => {
   const [columnsData, setColumnsData] = useState([]);
@@ -27,7 +37,7 @@ const Orders = () => {
       shippingDate,
       totalCost,
       department,
-      status,
+      status: { ...status, btnComponent: CustomButton },
       orderProducts,
     };
   };
