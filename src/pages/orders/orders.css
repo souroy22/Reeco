@@ -2,6 +2,10 @@
   padding: 20px 50px 0 50px;
 }
 
+.orders-details-section {
+  /* position: relative; */
+}
+
 .orders-details-top-section {
   box-shadow: 0 0 10px gray;
   padding: 20px 50px 20px 50px;
@@ -75,7 +79,7 @@
 }
 
 .order-details-down-section {
-  height: calc(100vh - 174px);
+  height: calc(100vh - 173px);
   overflow-y: auto;
 }
 

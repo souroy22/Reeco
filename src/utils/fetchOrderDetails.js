@@ -7,9 +7,9 @@ const getProductsDetails = (orderProducts) => {
       (prod) => prod.id === orderProducts[i].id
     );
     const data = productsData[indx];
-    // data["qnty"] = orderProducts[i].qnty;
     data.total = orderProducts[i].total;
     data.status = orderProducts[i].status;
+    data.editReason = orderProducts[i].editReason;
     products.push({ ...data, qnty: orderProducts[i].qnty });
   }
   return products;

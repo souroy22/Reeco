@@ -28,3 +28,22 @@
 .search-icon {
   color: gray;
 }
+
+.singleLineInput {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid gray;
+  width: 100%;
+  padding: 5px;
+}
+
+.singleLineInput:focus {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid gray;
+}
+
+.singleLineInput::placeholder {
+  color: gray;
+  font-size: 10px;
+}

@@ -1,0 +1,95 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(101, 101, 110, 0.8); /* Blue with 50% opacity */
+  z-index: 1;
+}
+
+.edit-ordered-product-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  background: #fff;
+  z-index: 2;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.5s;
+  transition: all 0.4s ease-in-out;
+  gap: 10px;
+}
+
+.col-1 {
+  display: flex;
+  justify-content: right;
+}
+
+.modalTitle {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.modal-sub-title {
+  color: gray;
+}
+
+.modal-body {
+  display: flex;
+  gap: 30px;
+}
+
+.modal-body-right {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  gap: 10px;
+}
+
+.modal-body-data {
+  display: flex;
+  gap: 150px;
+}
+
+.row-4 {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.optional-text {
+  font-weight: 400;
+  font-size: 10px;
+  color: gray;
+}
+
+.row-5 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.last-row {
+  display: flex;
+  justify-content: right;
+  gap: 20px;
+}
+
+.qty-section {
+  display: flex;
+  gap: 5px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

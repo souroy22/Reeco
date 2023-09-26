@@ -54,14 +54,14 @@ const TableComponent = ({ columns, data, onClickOnRow }) => {
             <StyledTableRow
               key={index}
               sx={{ cursor: "pointer" }}
-              onClick={() => onClickOnRow(rows.orderId.value)}
+              onClick={() => onClickOnRow && onClickOnRow(rows.orderId.value)}
             >
               {columns.map((column, indx) => (
                 <StyledTableCell
                   key={indx}
                   component="th"
                   scope="row"
-                  align={rows[column.value]?.align || "left"}
+                  align={rows[column.value]?.align || "center"}
                   width={column.width}
                 >
                   {columns[indx]?.isButton ? (

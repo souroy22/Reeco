@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./orders.css";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { Box, Button } from "@mui/material";
@@ -10,6 +10,7 @@ import CustomInput from "../../components/input/CustomInput";
 import TableComponent from "../../components/table/Table";
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import EditOrderedProduct from "../../components/modal/EditOrderedProduct";
 
 const columns = [
   { name: "", align: "left", value: "image", isImage: true, width: "100px" },
@@ -21,20 +22,46 @@ const columns = [
   { name: "Status", align: "left", value: "status", isButton: true },
 ];
 
-const ProductStatusBtn = (status) => {
-  return (
-    <Box sx={{ display: "flex", gap: "20px" }}>
-      <DoneOutlinedIcon />
-      <CloseOutlinedIcon />
-      <Box>Edit</Box>
-    </Box>
-  );
+const colorAccrodingToStatus = {
+  "MISSING-URGENT": { bgColor: "red", color: "white" },
+  MISSING: { bgColor: "orange", color: "white" },
+  EDITED: { bgColor: "green", color: "white" },
 };
 
 const OrderDetails = () => {
   const { orderId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [isEditing, setIsEditing] = useState(false);
+
+  const ProductStatusBtn = (status) => {
+    return (
+      <Box sx={{ display: "flex", gap: "20px" }}>
+        {status !== "PENDING" && (
+          <Button
+            sx={{
+              bgcolor: `${colorAccrodingToStatus[status].bgColor}`,
+              color: `${colorAccrodingToStatus[status].color}`,
+              borderRadius: "20px",
+            }}
+          >
+            {status}
+          </Button>
+        )}
+        <Box sx={{ display: "flex", gap: "20px" }}>
+          <DoneOutlinedIcon />
+          <CloseOutlinedIcon />
+          <Box
+            sx={{ color: "navy", fontWeight: 700 }}
+            onClick={() => setIsEditing(true)}
+          >
+            Edit
+          </Box>
+        </Box>
+      </Box>
+    );
+  };
 
   const orderDetails = useSelector((state) => state.orders.orderDetails);
 
@@ -48,13 +75,17 @@ const OrderDetails = () => {
     status
   ) => {
     return {
-      image: { value: image },
-      prodName: { value: prodName },
-      brand: { value: brand },
-      price: { value: price },
-      qnty: { value: qnty },
-      total: { value: total },
-      status: { value: status, btnComponent: ProductStatusBtn },
+      image: { value: image, align: "left" },
+      prodName: { value: prodName, align: "left" },
+      brand: { value: brand, align: "left" },
+      price: { value: price, align: "left" },
+      qnty: { value: qnty, align: "left" },
+      total: { value: total, align: "left" },
+      status: {
+        value: status,
+        btnComponent: ProductStatusBtn,
+        align: "left",
+      },
     };
   };
 
@@ -78,6 +109,10 @@ const OrderDetails = () => {
     return data;
   };
 
+  const onClose = () => {
+    setIsEditing(false);
+  };
+
   useEffect(() => {
     const orderData = fetchOrderDetails(orderId);
     dispatch(addOrderDetailsData(orderData));
@@ -85,6 +120,12 @@ const OrderDetails = () => {
 
   return (
     <div className="orders-details-section">
+      {isEditing && (
+        <EditOrderedProduct
+          onClose={onClose}
+          title="Chiecken Breast Fillets, Boneless Marinated 6 Lorem Ipsum ..."
+        />
+      )}
       <div className="orders-details-top-section">
         <div className="orders-details-section-top">
           <Link to="/orders" style={{ textDecoration: "none", color: "gray" }}>
