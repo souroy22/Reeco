@@ -37,7 +37,10 @@ const TableComponent = ({ columns, data, onClickOnRow }) => {
         <TableHead>
           <TableRow>
             {columns.map((column) => (
-              <StyledTableCell align={column.align || "center"}>
+              <StyledTableCell
+                key={column.name}
+                align={column.align || "center"}
+              >
                 {column.name}
               </StyledTableCell>
             ))}
@@ -48,24 +51,24 @@ const TableComponent = ({ columns, data, onClickOnRow }) => {
             <StyledTableRow
               key={index}
               sx={{ cursor: "pointer" }}
-              onClick={() => onClickOnRow(rows[0].value)}
+              onClick={() => onClickOnRow(rows.orderId.value)}
             >
-              {Object.keys(rows).map((rowName, indx) => (
+              {columns.map((column, indx) => (
                 <StyledTableCell
                   key={indx}
                   component="th"
                   scope="row"
-                  align={rows[rowName]?.align || "center"}
+                  align={rows[column.value]?.align || "center"}
                 >
                   {columns[indx]?.isButton ? (
                     <Button
                       variant="contained"
-                      color={statusBtnColor[rows[rowName]?.value]}
+                      color={statusBtnColor[rows[column.value]?.value]}
                     >
-                      {rows[rowName]?.value}
+                      {rows[column.value]?.value}
                     </Button>
                   ) : (
-                    rows[rowName]?.value
+                    rows[column.value]?.value
                   )}
                 </StyledTableCell>
               ))}

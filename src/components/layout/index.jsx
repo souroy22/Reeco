@@ -8,7 +8,7 @@ const LayoutSection = () => {
   const location = useLocation();
 
   useEffect(() => {
-    location === "/" && navigate("/orders");
+    location.pathname === "/" && navigate("/orders");
   }, []);
 
   return (

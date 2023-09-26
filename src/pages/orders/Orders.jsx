@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TableComponent from "../../components/table/Table";
-import { columns, data } from "../../statisData/orders";
+import { columns, data, productsData } from "../../statisData/orders";
 import { addOrders } from "../../redux/reducers/orderReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -12,24 +12,33 @@ const Orders = () => {
   const navigate = useNavigate();
   const ordersData = useSelector((state) => state.orders.ordersData);
 
-  const createData = (name, calories, fat, carbs, protein, status) => {
+  const createOrderData = (
+    orderId,
+    supplier,
+    shippingDate,
+    totalCost,
+    department,
+    status,
+    orderProducts
+  ) => {
     return {
-      name,
-      calories,
-      fat,
-      carbs,
-      protein,
+      orderId,
+      supplier,
+      shippingDate,
+      totalCost,
+      department,
       status,
+      orderProducts,
     };
   };
 
   const initialLoad = () => {
     const ordersData = [];
     for (let i = 0; i < data.length; i++) {
-      const d = createData(...data[i]);
+      const d = createOrderData(...data[i]);
       ordersData.push(d);
     }
-    dispatch(addOrders(data));
+    dispatch(addOrders(ordersData));
     setColumnsData(columns);
   };
 

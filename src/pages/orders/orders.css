@@ -73,3 +73,28 @@
   font-size: 18px;
   font-weight: 700;
 }
+
+.order-details-down-section {
+  height: calc(100vh - 174px);
+  overflow-y: auto;
+}
+
+.orders-details-bottom-section {
+  margin: 20px 50px 0 50px;
+  border-radius: 10px;
+  border: 1px solid rgb(192, 184, 184);
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.orders-details-bottom-section-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.orders-details-bottom-section-top-right {
+  display: flex;
+  gap: 40px;
+}

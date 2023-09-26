@@ -1,0 +1,30 @@
+.searchBox {
+  border: 1px solid rgb(218, 205, 205);
+  display: flex;
+  padding: 3px 5px;
+  padding-left: 10px;
+  border-radius: 20px;
+  width: 300px;
+  justify-content: space-between;
+}
+
+.searchInput {
+  outline: none;
+  border: none;
+  width: 95%;
+}
+
+.searchInput::placeholder {
+  color: gray;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.searchInput:focus {
+  outline: none;
+  border: none;
+}
+
+.search-icon {
+  color: gray;
+}

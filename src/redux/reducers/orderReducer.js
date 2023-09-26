@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   ordersData: [],
+  orderDetails: {},
 };
 
 export const counterSlice = createSlice({
@@ -11,9 +12,12 @@ export const counterSlice = createSlice({
     addOrders: (state, action) => {
       state.ordersData = action.payload;
     },
+    addOrderDetailsData: (state, action) => {
+      state.orderDetails = action.payload;
+    },
   },
 });
 
-export const { addOrders } = counterSlice.actions;
+export const { addOrders, addOrderDetailsData } = counterSlice.actions;
 
 export default counterSlice.reducer;
